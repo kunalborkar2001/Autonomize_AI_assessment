@@ -4,12 +4,14 @@ const mongoose = require('mongoose');
 const axios = require('axios');
 const bodyParser = require('body-parser');
 const User = require("./src/schema/schema")
+const cors = require("cors")
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+app.use((cors()))
+
 // Connect to MongoDB
 mongoose.connect('mongodb+srv://kunalborkar2001:pveoINdiVlZx2wEm@kunalsmongo.5raphyd.mongodb.net/github_api_backend', { useNewUrlParser: true, useUnifiedTopology: true });
-
 
 // Middleware
 app.use(bodyParser.json());
@@ -24,7 +26,7 @@ app.post('/users/:username', async (req, res) => {
         const existingUser = await User.findOne({ username });
 
         if (existingUser) {
-            return res.status(400).json({ message: 'User already exists in the database.' });
+            return res.status(200).json(existingUser);
         }
 
         // Fetch user data from GitHub API

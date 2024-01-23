@@ -1,0 +1,15 @@
+.grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 40px;
+    align-items: center;
+    text-align: center;
+}
+
+.grid .gridRepoList {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}

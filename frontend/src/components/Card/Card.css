@@ -1,0 +1,21 @@
+.card {
+    border: solid 1px black;
+    height: 200px;
+    width: 200px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.card img {
+    height: 30%;
+    width: 30%;
+    border-radius: 56px;
+}
+
+.card .details {
+    display: flex;
+    flex-direction: column;
+}

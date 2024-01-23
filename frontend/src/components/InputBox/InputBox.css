@@ -1,0 +1,15 @@
+.inputbox {
+    display: flex;
+    justify-content: center;
+    margin-top: 10vh;
+    gap: 1%;
+}
+
+.inputbox input {
+    height: 20px;
+
+}
+
+.inputbox button {
+    border-radius: 6px;
+}

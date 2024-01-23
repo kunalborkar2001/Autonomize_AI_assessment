@@ -136,7 +136,27 @@ app.delete('/users/:username', async (req, res) => {
     }
 });
 
-// Implement other API endpoints as described
+// Add a new API endpoint for fetching and sorting all users
+app.get('/users/sorted', async (req, res) => {
+    try {
+        const { sortBy } = req.query;
+
+        // Validate the sortBy parameter
+        const validSortFields = ['public_repos', 'public_gists', 'followers', 'following', 'created_at'];
+        if (!validSortFields.includes(sortBy)) {
+            return res.status(400).json({ message: 'Invalid sortBy parameter.' });
+        }
+
+        // Fetch and sort all users from the database
+        const users = await User.find().sort({ [`userdata.${sortBy}`]: -1 });
+
+        res.status(200).json(users);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
 
 
 

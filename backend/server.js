@@ -10,19 +10,6 @@ const PORT = process.env.PORT || 3001;
 // Connect to MongoDB
 mongoose.connect('mongodb+srv://kunalborkar2001:pveoINdiVlZx2wEm@kunalsmongo.5raphyd.mongodb.net/github_api_backend', { useNewUrlParser: true, useUnifiedTopology: true });
 
-// // Define User schema
-// const userSchema = new mongoose.Schema({
-//   username: { type: String, unique: true, required: true },
-//   id : {type : String},
-
-//   // Add other fields as needed (e.g., location, blog, bio)
-//   // ...
-
-//   // Soft delete flag
-//   deleted: { type: Boolean, default: false },
-// });
-
-// const User = mongoose.model('User', userSchema);
 
 // Middleware
 app.use(bodyParser.json());
@@ -47,7 +34,7 @@ app.post('/users/:username', async (req, res) => {
         if (githubResponse.status !== 200) {
             return res.status(githubResponse.status).json({ message: 'GitHub user not found.' });
         }
-        
+
         const userData = githubResponse.data;
 
         // Save user details into the database
@@ -98,7 +85,60 @@ app.post('/users/:username', async (req, res) => {
     }
 });
 
+app.get('/users/search', async (req, res) => {
+    try {
+        const { username, location } = req.query;
+
+        // Build the search query based on the provided parameters
+        const searchQuery = {};
+
+        if (username) {
+            searchQuery.username = { $regex: new RegExp(username, 'i') }; // Case-insensitive search
+        }
+
+        if (location) {
+            searchQuery['userdata.location'] = { $regex: new RegExp(location, 'i') };
+        }
+
+        // Search users in the database
+        const searchResults = await User.find(searchQuery);
+
+        res.status(200).json(searchResults);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+// Add a new API endpoint for soft deletion
+app.delete('/users/:username', async (req, res) => {
+    const { username } = req.params;
+
+    try {
+        // Find the user in the database
+        const user = await User.findOne({ username });
+
+        // Check if the user exists
+        if (!user) {
+            return res.status(404).json({ message: 'User not found.' });
+        }
+
+        // Set the deleted flag to true
+        user.deleted = true;
+
+        // Save the updated user in the database
+        await user.save();
+
+        res.status(200).json({ message: 'User soft deleted successfully.' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
 // Implement other API endpoints as described
+
+
 
 // Start the server
 app.listen(PORT, () => {

@@ -1,6 +1,6 @@
 // api.js
 
-const url = "http://localhost:3001";
+const url = "https://autonomize-ai-assessment.onrender.com";
 
  async function getAllUsers() {
     const response = await fetch(`${url}/users/search`);

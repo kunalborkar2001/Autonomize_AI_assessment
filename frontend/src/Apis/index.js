@@ -32,7 +32,6 @@ const url = "http://localhost:3001";
         }
 
         const responseData = await response.json();
-        console.log('User created successfully:', responseData);
 
         return responseData; // Return the result if needed
     } catch (error) {

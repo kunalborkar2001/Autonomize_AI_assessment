@@ -1,0 +1,52 @@
+.repoDescription {
+    display: flex;
+    justify-content: center;
+    margin-top: 10vh;
+
+}
+
+.catagories  {
+    display: flex;
+    padding: 5px;
+}
+
+.catagories p {
+    border: solid 1px rgba(99, 99, 235, 0.683);
+    margin: 5px;
+    padding: 10px;
+    color: rgb(34, 34, 231);
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+
+.repoDescription .left {
+    display: flex;
+    flex-direction: column;
+}
+
+.repoDescription .left img{
+    height: 100px;
+    width: 100px;
+    justify-self: center;
+    align-self: center;
+    border-radius: 100px;
+}
+.repoDescription .right {
+    display: flex;
+    width: 40vw;
+    flex-direction: column;
+}
+
+
+.repoDescription .right .application {
+    color: gray;
+
+}
+
+.repoDescription .right button {
+    height: 35px;
+    width: 150px;
+    background: rgb(110, 211, 110);
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}

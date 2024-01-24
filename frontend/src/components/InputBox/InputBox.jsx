@@ -1,40 +1,41 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import "./InputBox.css"
+import './InputBox.css';
 
 const InputBox = () => {
-    const navigate = useNavigate();
-    const [username, setUsername] = useState('')
+  const navigate = useNavigate();
+  const [username, setUsername] = useState('');
 
-
-    const handleUserClick = () => {
-        navigate(`/repolist/${username}`);
+  const handleUserClick = () => {
+    if (username.length !== 0) {
+      navigate(`/repolist/${username}`);
     }
+  };
 
-    const handleChange = (e) => {
-        setUsername(e.target.value)
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent the default form submission behavior
+    handleUserClick();
+  };
 
-    
+  const handleChange = (e) => {
+    setUsername(e.target.value);
+  };
 
-    return (
-        <div className='inputbox'>
-            
-            <input 
-            type="text" 
-            placeholder='Enter the username you want to search...' 
-            onChange={handleChange}
-            value={username}
-            required
-            />
-            
-            <button
-            onClick={handleUserClick}
-            >
-                Search User
-            </button>
-        </div>
-    )
-}
+  return (
+    <form className="inputbox" onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="Enter the username you want to search..."
+        onChange={handleChange}
+        value={username}
+        required
+      />
 
-export default InputBox
+      <button type="submit">
+        Search User
+      </button>
+    </form>
+  );
+};
+
+export default InputBox;

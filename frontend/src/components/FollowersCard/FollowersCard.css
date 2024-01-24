@@ -1,0 +1,20 @@
+.followersCard {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+    overflow: hidden;
+}
+
+.followersCard:hover {
+    transform: scale(1.1);
+    transition: all ease .4s;
+    cursor: pointer;
+}
+
+.followersCard img {
+    height: 100px;
+    width: 100px;
+    border-radius: 50px;
+}

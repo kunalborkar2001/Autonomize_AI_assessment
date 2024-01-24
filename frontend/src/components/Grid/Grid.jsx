@@ -12,6 +12,19 @@ const Grid = ({ homeRepo, repoList, username }) => {
     const [checkUser, setcheckUser] = useState([])
     const [reposUrl, setReposUrl] = useState(null)
     const [repoData, setRepoData] = useState([])
+    const [follwersData, setFollwersData] = useState([])
+
+    useEffect(() => {
+      if(checkUser.length !=0) {
+        let followersData = async() => {
+            let response = await fetch(checkUser.followers_url)
+            let jsonData = await response.json()
+            setFollwersData(jsonData)
+        }
+        followersData()
+      }
+    }, [checkUser.followers_url])
+    
 
     useEffect(() => {
         let allUsersData = async () => {
@@ -46,7 +59,7 @@ const Grid = ({ homeRepo, repoList, username }) => {
             }
         }
     }, [reposUrl])
-    
+
 
 
 
@@ -68,19 +81,19 @@ const Grid = ({ homeRepo, repoList, username }) => {
             {repoList && (
                 <div>
                     <div>
-                        <img src={checkUser.avatar_url} alt="kunaborkar2001@gmail.com" style={{height: "90px", borderRadius: "50px"}}/>
-                    <h1>{username}</h1>
-                    <p>{checkUser.bio ? checkUser.bio : "The user have no bios"}</p>
-
+                        <img src={checkUser.avatar_url} alt="kunaborkar2001@gmail.com" style={{ height: "90px", borderRadius: "50px" }} />
+                        <h1>{username}</h1>
+                        <p>{checkUser.bio ? checkUser.bio : "The user has no bio"}</p>
+                        <Link to={`/followers/${username}`} state= { follwersData } style={{ color: "black", textDecoration: "none" }}><button style={{height : "2rem", width:"5rem", background:"cyan", opacity:"0.8", borderRadius:"12px"}}>Followers</button></Link>
                     </div>
                     <div className="gridRepoList">
-                        {repoData.length> 0 && repoData.map((elem) => (
-                            <RepoCard name={elem.name} image={elem.owner.avatar_url} description={elem.description}/>
+                        {repoData.map((elem) => (
+                            <RepoCard key={elem.id} id = {elem.id} name={elem.name} image={elem.owner.avatar_url} description={elem.full_name} repoData={elem}/>
                         ))}
-                        
                     </div>
                 </div>
             )}
+
 
         </div>
     )

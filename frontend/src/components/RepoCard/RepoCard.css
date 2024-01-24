@@ -1,15 +1,31 @@
 .repoCard {
-    height: 300px;
+    min-height: 300px;
     width: 300px;
-    border: solid 1px black;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 10px;
-    padding: 10px;
+    padding: 20px;
+    
+}
+
+.repoCard:hover {
+    transform: scale(1.1);
+    transition: all ease .4s;
+    cursor: pointer;
 }
 
 .repoCard img {
-    height: 30%;
+    height: 50px;
     border-radius: 50px;
+}
+
+.repoCard p {
+    max-height: 100px;
+    overflow-y: auto;
+    margin-top: 10px;
+}
+.repoCard h4 {
+    color: rgba(60, 9, 108, 0.601);
 }

@@ -1,6 +1,6 @@
 // api.js
 
-const url = "https://autonomize-ai-assessment.onrender.com";
+const url = "https://jolly-erin-tights.cyclic.app";
 
  async function getAllUsers() {
     const response = await fetch(`${url}/users/search`);
